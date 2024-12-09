@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>Sign Up</h1>
-        <form action="signup.php" method="get">
+        <form action="signup.php" method="POST">
         <label for="username"> Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password:</label>
