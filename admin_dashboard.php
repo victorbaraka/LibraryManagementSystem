@@ -53,6 +53,14 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <Style>
+        body {
+            background-color: antiquewhite;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: medium;
+
+        }
+        </Style>
 </head>
 <body>
     <h1>Admin Dashboard</h1>
@@ -81,6 +89,7 @@ $conn->close();
     <h2>Current Books</h2>
     <?php
     if ($books_result->num_rows > 0) {
+        echo"<Div class=\"displaytable\">";
         echo "<table>";
         echo "<tr><th>ID</th><th>Title</th><th>Author</th><th>Genre</th><th>Publication Date</th></tr>";
         while ($row = $books_result->fetch_assoc()) {
@@ -93,6 +102,7 @@ $conn->close();
             
         }
         echo "</table>";
+        echo"</div>";
     } else {
         echo "<p>No books available.</p>";
     }
