@@ -17,8 +17,10 @@ session_start();
         <a class="active" href="homepage.php">
             Home
         </a>
-        <a href="homepage.php">Request</a>
-        <a href="add_book.php">Add Book</a>
+        <a href="homepage.php">Home</a>
+        <a href="add_book.php">Genre</a>
+        <a href="">Categories</a>
+        <a href="">Popular</a>
         <div class="search">
         <form action="Search.php" method="GET">    
         <Input type="text" id="search" name="search" placeholder="Search..">
@@ -31,10 +33,25 @@ session_start();
 
     </div>
        <header>
+    <div class="welcome message">
         <h1>Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
        </header>
+    </div>
+    <div class="recents" >
+        <p>Recently Read📖</p>
 
-        <p>This is your homepage</p>
+    </div>
+    <div>
+        <p>More by same Author</p>
+    </div>
+    <div>
+        <p>More of the same Genre</p>
+    </div>
+    <div class="recommended">
+        <p> More you may like❤</p>
+
+    </div>
+    
 
         
 
