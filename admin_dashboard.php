@@ -23,7 +23,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
     $genre = $_POST["genre"];
     $pub_date = $_POST["pub_date"];
 
-    $sql = "INSERT INTO books (title, author, genre, pub_date) VALUES ('$title', '$author', '$genre', '$pub_date')";
+    //Handling Cover image upload
+    $target_dir = "D:/Xampp/htdocs/Test/";
+    $target_file= $target_dir.basename($_FILES["cover_image"]["name"]);
+
+    // Check if file is an image
+
+    $check = getimagesize($_FILES["cover_image"]["tmp_name"]);
+    if ($check !== FALSE){
+    if(move_uploaded_file($_FILES["cover_image"]["tmp_name"],$target_file)){
+        echo "The file is  ". htmlspecialchars(basename($_FILES["cover_image"]["name"])). "has been uploaded";
+    }
+    else{
+        echo "sorry there is an error in the upload of your file";
+        exit;
+    }
+
+    }
+    else{
+        echo "file is not an image.";
+        exit;
+    }
+
+    $sql = "INSERT INTO books (title, author, genre, pub_date,cover_image) VALUES ('$title', '$author', '$genre', '$pub_date', '$target_file')";
     if ($conn->query($sql) === TRUE) {
         echo "New book added successfully";
     } else {
@@ -65,18 +87,36 @@ $conn->close();
 <body>
     <h1>Admin Dashboard</h1>
     <h2>Add a New Book</h2>
-    <form action="admin_dashboard.php" method="POST">
+    <div>
+    <form action="admin_dashboard.php" method="POST" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
+        
+        <div>
+        <label for="Cover Image">Cover Image</label>
+        <input type="file" name="cover_image" class="form-control" accept="image/*" required>
+        </div>
+        <div>
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" required><br><br>
+        </div>
+
+        <div>
         <label for="genre">Genre:</label>
         <input type="text" id="genre" name="genre" required><br><br>
+        </div>
+
+        
+            
+        <div>
         <label for="pub_date">Publication Date:</label>
         <input type="date" id="pub_date" name="pub_date" required><br><br>
+        </div>
         <input type="hidden" name="add_book" value="true">
         <input type="submit" value="Add Book">
     </form>
+    </div>
+    
 
     <h2>Delete a Book</h2>
     <form action="admin_dashboard.php" method="POST">
@@ -91,14 +131,25 @@ $conn->close();
     if ($books_result->num_rows > 0) {
         echo"<Div class=\"displaytable\">";
         echo "<table>";
-        echo "<tr><th>ID</th><th>Title</th><th>Author</th><th>Genre</th><th>Publication Date</th></tr>";
+        echo "<tr><th>ID</th><th>Title</th><th>Author</th><th>Genre</th><th>Publication Date</th><th>Cover image</th></tr>";
         while ($row = $books_result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>". $row['id'] ."<td>";
-            echo "<td>". $row['title'] ."<td>";
-            echo "<td>". $row['author'] ."<td>";
-            echo "<td>". $row['genre'] ."<td>";
-            echo "<td>". $row['pub_date'] ."<td>";
+            echo "<td>". $row['id'] ."</td>";
+            echo "<td>". $row['title'] ."</td>";
+            echo "<td>". $row['author'] ."</td>";
+            echo "<td>". $row['genre'] ."</td>";
+            echo "<td>". $row['pub_date'] ."</td>";
+
+            // Display the cover image 
+            $cover_image_path = $row['cover_image'];
+            if (file_exists($cover_image_path)){
+                echo "<td><img src='". $cover_image_path. "' alt='cover image' style='width: 100px; height:auto'></td>";
+            }
+            else{
+                echo"<td> No image available </td>";
+            }
+            echo"</tr>";
+            
             
         }
         echo "</table>";
