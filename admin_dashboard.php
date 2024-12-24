@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
     $title = $_POST["title"];
     $author = $_POST["author"];
-    $genre = $_POST["genre"];
+    $genre = $_POST["Genre"];
     $pub_date = $_POST["pub_date"];
 
     //Handling Cover image upload
@@ -92,23 +92,29 @@ $conn->close();
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
         
-        <div>
+        <div class="coverImage">
         <label for="Cover Image">Cover Image</label>
         <input type="file" name="cover_image" class="form-control" accept="image/*" required>
         </div>
-        <div>
+        <div class="author">
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" required><br><br>
         </div>
 
-        <div>
+        <div class="genre">
         <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="genre" required><br><br>
+        <select name="Genre" id="Genre">
+            <option value="Fiction">Fiction</option>
+            <option value="SciFi">Scifi</option>
+            <option value="Education">Education</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Self help">Self help</option>
+        </select>
         </div>
 
         
             
-        <div>
+        <div class="pubDate">
         <label for="pub_date">Publication Date:</label>
         <input type="date" id="pub_date" name="pub_date" required><br><br>
         </div>
