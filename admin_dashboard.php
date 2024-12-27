@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
     $pub_date = $_POST["pub_date"];
 
     //Handling Cover image upload
-    $target_dir = "\D:\Xampp\htdocs\Test\\";
+    $target_dir = "uploads/";
     $target_file= $target_dir.basename($_FILES["cover_image"]["name"]);
 
     // Check if file is an image
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
     $check = getimagesize($_FILES["cover_image"]["tmp_name"]);
     if ($check !== FALSE){
     if(move_uploaded_file($_FILES["cover_image"]["tmp_name"],$target_file)){
-        echo "The file is  ". htmlspecialchars(basename($_FILES["cover_image"]["name"])). "has been uploaded";
+        echo "The file  ". htmlspecialchars(basename($_FILES["cover_image"]["name"])). "has been uploaded";
     }
     else{
         echo "sorry there is an error in the upload of your file";
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
 
 // Handle book deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_book"])) {
@@ -158,9 +159,9 @@ $conn->close();
             echo "<td>". $row['pub_date'] ."</td>";
 
             // Display the cover image 
-            $cover_image_path = $row['cover_image'];
+            $cover_image_path = basename($row['cover_image']);
             if (file_exists($cover_image_path)){
-                echo "<td><img src='". $cover_image_path. "' alt='cover image' style='width: 100px; height:auto'></td>";
+                echo "<td><img src='uploads/". $cover_image_path. "' alt='cover image' style='width: 100px; height:auto'></td>";
             }
             else{
                 echo"<td> No image available </td>";
