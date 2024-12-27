@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
     $pub_date = $_POST["pub_date"];
 
     //Handling Cover image upload
-    $target_dir = "D:/Xampp/htdocs/Test/";
+    $target_dir = "\D:\Xampp\htdocs\Test\\";
     $target_file= $target_dir.basename($_FILES["cover_image"]["name"]);
 
     // Check if file is an image
@@ -85,10 +85,21 @@ $conn->close();
         </Style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
-    <h2>Add a New Book</h2>
+
+    <h1>Welcome back <?php echo htmlspecialchars($_SESSION["admin-username"]); ?>! </h1>
+    
     <div>
+    <h2>Add a New Book</h2>
     <form action="admin_dashboard.php" method="POST" enctype="multipart/form-data">
+
+    <div>
+    <label for="search">Search</label>
+    <input type="text" name="search" id="search" class="search" placeholder="Search...">
+     <button type="submit" value="search" class="searchButton">
+        <img src="search-icon.png" alt="search">
+     </button>
+    </div>
+
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
         
