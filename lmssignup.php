@@ -11,6 +11,7 @@
         <form action="signup.php" method="POST" onsubmit="return validateForm()">
         <label for="username"> Username:</label>
         <input type="text" id="username" name="username" required>
+        <span class="message<?php echo isset($_GET['valid'] )&&$_GET['valid']== '1'?'valid':''; ?>"><?php echo isset($_GET['msg'])? htmlspecialchars($_GET['msg']) : ''; ?></span>
         <span id="usernameError" class="error"></span><span id="usernameValid" class= "valid"></span><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br> <br>
@@ -36,7 +37,7 @@
 
                 }
                 else{
-                    document.getElementById('usernameError').textContent="Invalid Username"
+                    document.getElementById('usernameError').textContent="❌"
                     return false;//Deny form submission
                 }
 

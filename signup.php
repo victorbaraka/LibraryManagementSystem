@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $sql = "INSERT INTO users (username, password,email) VALUES('$username','$hashed_password','$email')";
     if($conn->query($sql)===TRUE){
-        echo "New record created successfully";
+        $msg=  "New record created successfully";
         header("Location: lmslogin.php");
         
     }
