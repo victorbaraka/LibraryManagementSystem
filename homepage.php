@@ -17,14 +17,14 @@ session_start();
         <a class="active" href="homepage.php">
             Home
         </a>
-        <a href="homepage.php">Home</a>
+        
         <a href="add_book.php">Genre</a>
         <a href="">Categories</a>
         <a href="">Popular</a>
         <div class="search">
         <form action="Search.php" method="GET">    
         <Input type="text" id="search" name="search" placeholder="Search..">
-        <button type="Submit"  value="search"  class="Search-button">
+        <button type="Submit"  value="search"  class="searchButton">
             <img src="search-icon.png" alt="Search">
         </button>
     </form>
@@ -38,18 +38,18 @@ session_start();
        </header>
     </div>
     <div class="recents" >
-        <p>Recently Read📖</p>
+        <h3>Recently Read📖</h3>
         
 
     </div>
     <div>
-        <p>More by same Author</p>
+        <h3>More by same Author</h3>
     </div>
     <div>
-        <p>More of the same Genre</p>
+        <h3>More of the same Genre</h3>
     </div>
     <div class="recommended">
-        <p> More you may like❤</p>
+        <h4> More you may like</h4>
 
     </div>
     
