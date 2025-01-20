@@ -120,17 +120,3 @@ input[type="submit"]:focus{
 
 
 
-/*@media (prefers-color-scheme: dark){
-    body{
-        background-color: black;
-        color: #fff;
-    }
-
-}
-@media (prefers-color-scheme: light){
-    body{
-        background-color: #fff;
-        color: #000;
-    }
-    
-}*/
