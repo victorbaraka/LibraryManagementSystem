@@ -30,6 +30,9 @@
 
     
 }
+.searchButton:hover{
+    cursor: pointer;
+}
 .topnav input[type=text]{
     padding: 6px;
     border: none;
@@ -67,3 +70,45 @@ body{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: medium;
 }
+/*grid Css*/
+.gridContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+
+}
+.gridItem{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+.gridItem img{
+    width: 100%;
+    height: auto;
+}
+.gridItem p{
+    margin: 10px 0 0;
+    font-size: medium;
+    color: #333;
+
+
+}
+
+/*@media (prefers-color-scheme: dark){
+    body{
+        background-color: black;
+        color: #fff;
+    }
+
+}
+@media (prefers-color-scheme: light){
+    body{
+        background-color: #fff;
+        color: #000;
+    }
+    
+}*/
