@@ -66,12 +66,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_book"])) {
         exit;
     }
 
+//checking if book already exists and adds to the quantity
+    $sql= "SELECT id, quantity FROM books WHERE title = '$title' AND author = '$author' AND pub_date = '$pub_date'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows>0){
+        $row = $result->fetch_assoc();
+        $new_quantity = $row['quantity']+1;
+        $update_sql = "UPDATE books SET quantity = $new_quantity WHERE id = ".$row['id'];
+        if ($conn->query($update_sql)===TRUE){
+            $bookAddMsg = "book quantity added successfully";
+        }else{
+            $bookAddError ="Error Updating record".$conn->error;
+
+        }
+        
+    }
+    else{
+//book doesn't exist handle addition
     $sql = "INSERT INTO books (title, author, genre, pub_date,cover_image,isbn) VALUES ('$title', '$author', '$genre', '$pub_date', '$target_file','$isbn')";
     if ($conn->query($sql) === TRUE) {
         $bookAddMsg= "New book added successfully";
     } else {
         $bookAddError= "Error: " . $sql . "<br>" . $conn->error;
     }
+}
 }
 
 
