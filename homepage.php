@@ -1,5 +1,17 @@
 <?php
 session_start();
+require 'dbconn.php';
+
+// Init books array
+$books=[];
+$query= "SELECT title, cover_image FROM books";
+$result= $conn->query($query);
+if ($result->num_rows>0){
+    while($row = $result->fetch_assoc()){
+        $books[]=$row;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -39,7 +51,15 @@ session_start();
     </div>
     <div class="recents" >
         <h3>Recently Read📖</h3>
-        
+        <div class="gridContainer">
+            <?php foreach($books as $book): ?>
+            <div class="gridItem">
+            <img src="<?php echo htmlspecialchars($book['cover_image']);   ?>"alt="<?php echo htmlspecialchars($book['$title']); ?>"
+            <p><?php echo htmlspecialchars($book['title']); ?></p>
+            </div>
+            <?php endforeach; ?>
+
+        </div>
 
     </div>
     <div>
